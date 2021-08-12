@@ -1,0 +1,19 @@
+\copy reviews(id, product_id, rating, date, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpful)
+FROM '../SDC-CSV-Data/reviews.csv'
+DELIMITER ','
+CSV HEADER;
+
+\copy reviews_photos(id, review_id, url)
+FROM '../SDC-CSV-Data/reviews_photos.csv'
+DELIMITER ','
+CSV HEADER;
+
+\copy characteristics(id, product_id, name)
+FROM '../SDC-CSV-Data/characteristics.csv'
+DELIMITER ','
+CSV HEADER;
+
+\copy characteristic_reviews(id, characteristic_id, review_id, value)
+FROM '../SDC-CSV-Data/characteristic_reviews.csv'
+DELIMITER ','
+CSV HEADER;
