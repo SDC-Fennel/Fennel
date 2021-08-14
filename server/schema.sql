@@ -5,12 +5,12 @@ CREATE TABLE IF NOT EXISTS reviews (
   date TEXT NOT NULL,
   summary TEXT NOT NULL,
   body TEXT NOT NULL,
-  recommend BOOLEAN NOT NULL,
-  reported BOOLEAN NOT NULL,
+  recommend BOOLEAN NOT NULL DEFAULT true,
+  reported BOOLEAN NOT NULL DEFAULT false,
   reviewer_name TEXT NOT NULL,
   reviewer_email TEXT NOT NULL,
   response TEXT,
-  helpful INT NOT NULL
+  helpful INT NOT NULL DEFAULT 0,
 );
 
 CREATE TABLE IF NOT EXISTS reviews_photos (
