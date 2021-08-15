@@ -11,14 +11,12 @@ module.exports = {
     const route = url[url.length - 1];
 
     if (route.includes('meta')) {
+      // const output = models.reviews.getMeta(product_id);
+      // res.status(200).send(output);
       models.reviews.getMeta(product_id)
         .then((results) => {
-          // const output = {
-          //   product_id,
-          //   recommended,
-          //   characteristics,
-          // };
-          res.status(200).send(results.rows);
+          results.forEach((result) => console.log(result.rows));
+          res.status(200).send('success');
         })
         .catch((error) => {
           console.log(error);

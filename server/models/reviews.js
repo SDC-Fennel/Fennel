@@ -50,7 +50,7 @@ module.exports = {
       return array.join(', ');
     };
 
-    // remove recommend, reported and ehlpful. those will be default values
+    // remove recommend, reported and helpful. those will be default values
     const query = {
       text: `WITH reviewsInsert AS (
                INSERT INTO
@@ -106,9 +106,9 @@ module.exports = {
       characteristics: {},
     };
 
-    const query = {
-      text: `SELECT
-               rating, count(rating)
+    const ratingsQuery = {
+      text: `SELECT json_build_object
+               (rating, count(rating)) as rating
              FROM
                reviews
              WHERE product_id = $1
@@ -116,21 +116,46 @@ module.exports = {
       values: [productId],
     };
 
-    db.query(query)
-      .then((results) => {
-        results.rows.forEach((ratingCount) => {
-          const key = ratingCount.rating;
-          output.rating[key] = ratingCount.count;
-          // console.log(output);
-        });
-      })
-      .catch((error) => {
-        console.log(error, 'error retreiving ratings');
-      });
+    const recommendQuery = {
+      text: `SELECT json_build_object
+               (recommend, count(recommend)) as recommend
+             FROM
+               reviews
+             WHERE
+               product_id = $1
+             GROUP BY recommend`,
+      values: [productId],
+    };
 
-    // create a new query and keep adding to the output object
-    // eventually return the fully created output object once all queries are done
-    // console.log(output);
+    const characteristicsQuery = {
+      text: `SELECT characteristics.name, json_build_object (
+                     characteristics.id,
+                     AVG(characteristic_reviews.value)
+                   ) as data
+             FROM characteristics
+             LEFT JOIN characteristic_reviews
+             ON characteristics.id = characteristic_reviews.characteristic_id
+             WHERE characteristics.product_id = $1
+             GROUP BY characteristics.id`,
+      values: [productId],
+    };
+
+    // const ratingsQuery = db.query(query)
+    //   .then((results) => {
+    //     results.rows.forEach((ratingCount) => {
+    //       const key = ratingCount.rating;
+    //       output.rating[key] = ratingCount.count;
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error, 'error retreiving ratings');
+    //   });
+
+    return Promise.all([
+      db.query(ratingsQuery),
+      db.query(recommendQuery),
+      db.query(characteristicsQuery),
+    ]);
   },
 
   // "product_id": "2",
