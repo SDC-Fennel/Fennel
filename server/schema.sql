@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   reviewer_name TEXT NOT NULL,
   reviewer_email TEXT NOT NULL,
   response TEXT,
-  helpful INT NOT NULL DEFAULT 0,
+  helpful INT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS reviews_photos (

@@ -54,8 +54,8 @@ module.exports = {
     const query = {
       text: `WITH reviewsInsert AS (
                INSERT INTO
-                 reviews(product_id, rating, date, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpful)
-               VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                 reviews(product_id, rating, date, summary, body, recommend, reviewer_name, reviewer_email, response)
+               VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
                RETURNING id
              ), photos AS (
                INSERT INTO
@@ -73,11 +73,9 @@ module.exports = {
         inputs.summary,
         inputs.body,
         inputs.recommend,
-        inputs.reported,
         inputs.reviewer_name,
         inputs.reviewer_email,
         inputs.response,
-        inputs.helpful,
       ],
     };
 
@@ -108,7 +106,7 @@ module.exports = {
 
     const ratingsQuery = {
       text: `SELECT json_build_object
-               (rating, count(rating)) as rating
+               (rating, count(rating)) as ratings
              FROM
                reviews
              WHERE product_id = $1
@@ -128,10 +126,11 @@ module.exports = {
     };
 
     const characteristicsQuery = {
-      text: `SELECT characteristics.name, json_build_object (
-                     characteristics.id,
-                     AVG(characteristic_reviews.value)
-                   ) as data
+      text: `SELECT json_build_object(characteristics.name, json_build_object (
+                     'id', characteristics.id,
+                     'value', AVG(characteristic_reviews.value)
+                   )
+                  ) as characteristics
              FROM characteristics
              LEFT JOIN characteristic_reviews
              ON characteristics.id = characteristic_reviews.characteristic_id
@@ -139,17 +138,6 @@ module.exports = {
              GROUP BY characteristics.id`,
       values: [productId],
     };
-
-    // const ratingsQuery = db.query(query)
-    //   .then((results) => {
-    //     results.rows.forEach((ratingCount) => {
-    //       const key = ratingCount.rating;
-    //       output.rating[key] = ratingCount.count;
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error, 'error retreiving ratings');
-    //   });
 
     return Promise.all([
       db.query(ratingsQuery),
