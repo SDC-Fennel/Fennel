@@ -2,4 +2,6 @@ node_modules
 
 config.js
 
+k6.script.js
+
 loadingCommands.txt
