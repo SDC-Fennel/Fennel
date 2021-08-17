@@ -2,6 +2,8 @@ node_modules
 
 config.js
 
-k6.script.js
+k6.js
 
 loadingCommands.txt
+
+artillery.yaml
