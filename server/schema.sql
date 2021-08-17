@@ -32,9 +32,7 @@ CREATE TABLE IF NOT EXISTS characteristic_reviews (
   value INT NOT NULL
 );
 
-UPDATE reviews
-SET response = null
-WHERE response = 'null';
+
 
 CREATE INDEX rev_prod_id_idx ON reviews(product_id);
 CREATE INDEX rev_id_idx ON reviews_photos(review_id);
@@ -42,6 +40,10 @@ CREATE INDEX char_prod_id_idx ON characteristics(product_id);
 CREATE INDEX char_id_idx ON characteristic_reviews(characteristic_id);
 
 -- need to re-run the below after loading data
+UPDATE reviews
+SET response = null
+WHERE response = 'null';
+
 SELECT setval('reviews_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews), 1), false);
 SELECT setval('reviews_photos_id_seq', COALESCE((SELECT MAX(id)+1 FROM reviews_photos), 1), false);
 SELECT setval('characteristics_id_seq', COALESCE((SELECT MAX(id)+1 FROM characteristics), 1), false);
