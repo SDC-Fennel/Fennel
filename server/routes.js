@@ -8,8 +8,8 @@ router.post('/reviews', controllers.reviews.post);
 router.put('/reviews/:review_id/helpful', controllers.reviews.put);
 router.put('/reviews/:review_id/report', controllers.reviews.put);
 
-router.get('/loaderio-f130cc16fb5189d0794586b567c1aa9c.txt', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, '../loaderio-f130cc16fb5189d0794586b567c1aa9c.txt'));
+router.get('/loaderio-12f6526405c98439094afaa7a48aa8bc.txt', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../loaderio-12f6526405c98439094afaa7a48aa8bc.txt'));
 });
 
 module.exports = router;
