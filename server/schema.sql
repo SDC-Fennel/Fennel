@@ -32,8 +32,6 @@ CREATE TABLE IF NOT EXISTS characteristic_reviews (
   value INT NOT NULL
 );
 
-
-
 CREATE INDEX rev_prod_id_idx ON reviews(product_id);
 CREATE INDEX rev_id_idx ON reviews_photos(review_id);
 CREATE INDEX char_prod_id_idx ON characteristics(product_id);
