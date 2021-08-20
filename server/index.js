@@ -1,5 +1,4 @@
-// require('dotenv').config();
-// require('../newrelic.js');
+// require('newrelic');
 const express = require('express');
 const morgan = require('morgan');
 const router = require('./routes');

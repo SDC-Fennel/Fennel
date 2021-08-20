@@ -69,27 +69,6 @@ module.exports = {
   post: (req, res) => {
     req.query.date = Number(new Date());
 
-    // const testInput = {
-    //   product_id: 4,
-    //   rating: 5,
-    //   date: Number(new Date()),
-    //   summary: 'THIS IS A TEST',
-    //   body: 'BIG TEST',
-    //   recommend: false,
-    //   reported: false,
-    //   reviewer_name: 'TEST',
-    //   reviewer_email: 'TEST',
-    //   response: null,
-    //   helpful: 100000,
-    //   photos: ['url1', 'url2', 'url3'],
-    //   characteristics: {
-    //     10: 5,
-    //     11: 4,
-    //   },
-    // };
-
-    console.log(req.query);
-
     models.reviews.addReview(req.query)
       .then(() => {
         res.status(201).send('success');
