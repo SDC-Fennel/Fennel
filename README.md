@@ -32,7 +32,8 @@ $ npm install
 ```
 $ npm start
 ```
-
+# Database Schema
+![Screen Shot 2021-10-22 at 3 10 28 PM](https://user-images.githubusercontent.com/81180232/138528439-161c5cdc-8c27-44c9-955a-4ee41d253bf6.png)
 
 # REST API
 
@@ -96,7 +97,6 @@ product_id | integer | Specifies the product for which to retrieve reviews.
   ]
 }
 ```
-
 
 
 ## Get Review Metadata
