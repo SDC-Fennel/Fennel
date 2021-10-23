@@ -48,7 +48,7 @@ Parameter | Type | Description
 --- | --- | --- |
 page | integer | Selects the page of results to return. Default 1
 count | integer | Specifies how many results per page to return. Default 5.
-sort | text | Changes the sort order of reviews to be based on "newest", "helpful", or "relevant"
+sort | text | Changes the sort order of reviews to be based on "newest" or "helpful"
 product_id | integer | Specifies the product for which to retrieve reviews.
 
 ### Response
