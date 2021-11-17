@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-REST API for product reviews
+RESTful API for reviews for a product catalogue
 </p>
 
 
