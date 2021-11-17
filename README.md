@@ -15,12 +15,12 @@ To clone and run this application, you'll need Git and Node.js (which comes with
 
 #### Clone this repository
 ```
-$ git clone https://github.com/SDC-Fennel/SDC-RatingsAndReviews.git
+$ git clone https://github.com/SDC-Fennel/Fennel.git
 ```
 
 #### Go into the repository
 ```
-$ cd SDC-RatingsAndReviews.git
+$ cd Fennel
 ```
 
 #### Install dependencies
